@@ -77,3 +77,18 @@ h1 {
 p {
   line-height: 1.6;
 }
+
+/* --- Footer pinned bottom-left --- */
+.site-footer {
+  position: fixed;
+  bottom: 20px;   /* distance from bottom */
+  left: 25px;     /* distance from left */
+  font-size: 14px;
+  color: #374151; /* soft gray */
+  opacity: 0.7;
+  pointer-events: none; /* so it doesn't get in the way */
+}
+
+.site-footer:hover {
+  opacity: 1.0;
+}
