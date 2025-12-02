@@ -110,3 +110,53 @@ p {
   border-radius: 8px;
   display: block;
 }
+/* === Dropdown for Tools menu === */
+
+.nav-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown panel (hidden by default) */
+.nav-dropdown .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+
+  min-width: 200px;
+  padding: 8px 0;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 12px;
+  box-shadow:
+    4px 4px 10px rgba(0, 0, 0, 0.15),
+    -3px -3px 8px rgba(255, 255, 255, 0.7);
+  z-index: 1000;
+}
+
+/* Each dropdown item styled like softer nav links */
+.dropdown-item {
+  display: block;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-weight: 500;
+  color: #111827;
+  white-space: nowrap;
+}
+
+.dropdown-item:hover {
+  background: #f3f4f6;
+}
+
+/* Show dropdown on hover (desktop) */
+.nav-dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+/* Add small arrow on Tools */
+.nav-link.dropdown-toggle::after {
+  content: " ▾";
+  font-size: 0.75em;
+  margin-left: 4px;
+}
