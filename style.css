@@ -197,26 +197,13 @@ body.page-home-section {
   padding: 0 16px 40px;
 }
 
-/* Ensure navbar is above the video */
-.navbar {
-  position: relative;
-  z-index: 20;
-}
+/* === Fullscreen background video for /home === */
 
-/* Ensure footer also above the video */
-.site-footer {
-  z-index: 20;
-}
-/* Prevent ANY interaction with the background video */
-.page-home-section .bg-video {
-  pointer-events: none !important;  
-}
-/* ==== Final Background Video Fixes ==== */
-
-/* Make sure page-home-section creates a stacking context */
-.page-home-section {
-  position: relative;
+/* Make sure home page has dark fallback & stacking context */
+body.page-home-section {
+  margin: 0;
   background: #000;
+  color: #f9fafb;
 }
 
 /* Fullscreen background video */
@@ -226,14 +213,31 @@ body.page-home-section {
   left: 0;
   width: 100vw;
   height: 100vh;
-  object-fit: cover;
-  z-index: 0;
-  pointer-events: none !important; /* prevent any interaction */
+  object-fit: cover;          /* cover the whole screen */
+  z-index: 0;                 /* behind content, above body */
+  pointer-events: none;       /* no interaction */
 }
 
-/* Ensure navbar, content, footer all appear above the video */
+/* Home page main content centered over video */
+.page-home-section main {
+  position: relative;
+  z-index: 10;
+
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+  max-width: none;
+  margin: 0;
+  padding: 0 16px 40px;
+}
+
+/* Ensure navbar and footer are above the video too */
 .navbar,
-.page-home-section main,
 .site-footer {
   position: relative;
   z-index: 10;
