@@ -160,3 +160,50 @@ p {
   font-size: 0.75em;
   margin-left: 4px;
 }
+/* === Fullscreen background video for /home === */
+
+/* Override background specifically for the home-section page */
+body.page-home-section {
+  background: #000;
+  color: #f9fafb;
+}
+
+/* The background video itself */
+.page-home-section .bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;  /* cover the whole screen, cropping if needed */
+  z-index: -1;        /* sit behind everything */
+}
+
+/* Make sure content on the home page sits above video */
+.page-home-section main {
+  position: relative;
+  z-index: 10;
+
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+  max-width: none;       /* remove 900px cap so content feels more 'hero' */
+  margin: 0;             /* override default margins */
+  padding: 0 16px 40px;
+}
+
+/* Ensure navbar is above the video */
+.navbar {
+  position: relative;
+  z-index: 20;
+}
+
+/* Ensure footer also above the video */
+.site-footer {
+  z-index: 20;
+}
