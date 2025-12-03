@@ -1,17 +1,22 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8" />
-  <title>Home – Uno Bio</title>
-  <link rel="stylesheet" href="/style.css">
-</head>
 <body class="page-home-section">
   <!-- Shared header -->
   <div data-include="/partials/header.html"></div>
 
+  <!-- Fullscreen background video -->
+  <video
+    class="bg-video"
+    src="/media/dancing_molecules.mp4"
+    autoplay
+    muted
+    loop
+    playsinline
+  >
+    Your browser does not support the video tag.
+  </video>
+
   <!-- Unique content for the /home page -->
   <main>
-    <h1>Welcome to the UNO BIO Home Page</h1>
+    <h1>Welcome to the Uno Bio Home Page</h1>
     <p>This is the content section for your /home page. You can customize it completely.</p>
   </main>
 
@@ -21,4 +26,3 @@
   <!-- Loader script for header/footer -->
   <script src="/scripts/includes.js"></script>
 </body>
-</html>
