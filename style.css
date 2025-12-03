@@ -211,3 +211,30 @@ body.page-home-section {
 .page-home-section .bg-video {
   pointer-events: none !important;  
 }
+/* ==== Final Background Video Fixes ==== */
+
+/* Make sure page-home-section creates a stacking context */
+.page-home-section {
+  position: relative;
+  background: #000;
+}
+
+/* Fullscreen background video */
+.page-home-section .bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none !important; /* prevent any interaction */
+}
+
+/* Ensure navbar, content, footer all appear above the video */
+.navbar,
+.page-home-section main,
+.site-footer {
+  position: relative;
+  z-index: 10;
+}
