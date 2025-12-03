@@ -240,3 +240,29 @@ body.page-home-section {
   position: relative;
   z-index: 10;
 }
+/* === Full-page background for Portfolio page === */
+
+body.page-portfolio {
+  margin: 0;
+  min-height: 100vh;
+
+  background-image: url("/media/portfolio_bacteria_bg.webp"); /* USE WEBP HERE */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* OPTIONAL — remove if mobile scrolling feels slow */
+  /* background-attachment: fixed; */
+
+  color: #f9fafb;
+}
+
+/* Make portfolio content readable over the background */
+body.page-portfolio main {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 24px 24px 40px;
+  background: rgba(0, 0, 0, 0.45);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
