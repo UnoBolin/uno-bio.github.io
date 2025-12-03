@@ -5,20 +5,32 @@
   <title>Uno Bio – Home</title>
   <link rel="stylesheet" href="/style.css">
 </head>
-<body class="page-home">
+<body class="page-home-section">
   <!-- Shared header -->
   <div data-include="/partials/header.html"></div>
 
-  <!-- Page-unique content -->
+  <!-- Fullscreen background video -->
+  <video
+    class="bg-video"
+    src="/media/dancing_molecules.mp4"
+    autoplay
+    muted
+    loop
+    playsinline
+    disablepictureinpicture
+    controls="false"
+  ></video>
+
+  <!-- Main hero content -->
   <main>
-    <h1>Welcome to Uno Bio</h1>
-    <p>This is the home page. You can put your intro/hero content here.</p>
+    <h1>Welcome to the Uno Bio Home Page</h1>
+    <p>This is the content section for your /home page. You can customize it completely.</p>
   </main>
 
   <!-- Shared footer -->
   <div data-include="/partials/footer.html"></div>
 
-  <!-- Load includes script -->
+  <!-- Loader script for header/footer -->
   <script src="/scripts/includes.js"></script>
 </body>
 </html>
