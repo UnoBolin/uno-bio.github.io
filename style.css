@@ -316,3 +316,28 @@ body.page-contact main {
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
+
+/* === Full-page background video for Videos page === */
+
+body.page-videos {
+  margin: 0;
+  min-height: 100vh;
+  background: #000;   /* fallback */
+  color: #f9fafb;
+}
+
+body.page-videos .bg-video-videos {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none; /* prevents interaction like pause/fullscreen */
+}
+
+body.page-videos main {
+  position: relative;
+  z-index: 10;
+}
