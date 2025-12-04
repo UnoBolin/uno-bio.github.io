@@ -337,7 +337,17 @@ body.page-videos .bg-video-videos {
   pointer-events: none; /* prevents interaction like pause/fullscreen */
 }
 
+/* Make Videos page content readable on top of bright backgrounds */
 body.page-videos main {
   position: relative;
   z-index: 10;
+
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 24px 24px 40px;
+
+  /* This is your translucent black panel */
+  background: rgba(0, 0, 0, 0.45);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
