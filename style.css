@@ -10,7 +10,7 @@ body {
   color: #111827;
 }
 
-/* Center the page content a bit */
+/* Center the page content a bit (default pages) */
 main {
   max-width: 900px;
   margin: 40px auto;
@@ -24,6 +24,10 @@ main {
   justify-content: center;
   gap: 16px;
   padding: 20px 16px;
+
+  /* needs stacking for home/scripts background video */
+  position: relative;
+  z-index: 10;
 }
 
 /* Each link styled as a 3D-ish box */
@@ -86,13 +90,15 @@ p {
   font-size: 14px;
   color: #374151; /* soft gray */
   opacity: 0.7;
-  pointer-events: none; /* so it doesn't get in the way */
+  pointer-events: none;  /* so it doesn't get in the way */
+  z-index: 10;           /* above background videos */
 }
 
 .site-footer:hover {
   opacity: 1.0;
 }
-/* === Video Player Styling === */
+
+/* === Inline Video Player Styling (for non-background videos) === */
 
 .video-container {
   width: 50%;             /* half the page width */
@@ -106,10 +112,11 @@ p {
 
 .video-container video {
   width: 100%;            /* match container width */
-  height: auto;           /* auto shrink height so proportions stay correct */
+  height: auto;           /* keep aspect ratio */
   border-radius: 8px;
   display: block;
 }
+
 /* === Dropdown for Tools menu === */
 
 .nav-dropdown {
@@ -160,46 +167,10 @@ p {
   font-size: 0.75em;
   margin-left: 4px;
 }
-/* === Fullscreen background video for /home === */
 
-/* Override background specifically for the home-section page */
-body.page-home-section {
-  background: #000;
-  color: #f9fafb;
-}
+/* === Fullscreen background video for Home === */
 
-/* The background video itself */
-.page-home-section .bg-video {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;  /* cover the whole screen, cropping if needed */
-  z-index: -1;        /* sit behind everything */
-}
-
-/* Make sure content on the home page sits above video */
-.page-home-section main {
-  position: relative;
-  z-index: 10;
-
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  text-align: center;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
-  max-width: none;       /* remove 900px cap so content feels more 'hero' */
-  margin: 0;             /* override default margins */
-  padding: 0 16px 40px;
-}
-
-/* === Fullscreen background video for /home === */
-
-/* Make sure home page has dark fallback & stacking context */
+/* Home page base styling & dark fallback */
 body.page-home-section {
   margin: 0;
   background: #000;
@@ -213,48 +184,42 @@ body.page-home-section {
   left: 0;
   width: 100vw;
   height: 100vh;
-  object-fit: cover;
-  z-index: 0;
-  pointer-events: none;
+  object-fit: cover;      /* cover the whole screen */
+  z-index: 0;             /* behind content, above body */
+  pointer-events: none;   /* prevent any interaction */
 }
 
 /* Home page main content centered over video */
 .page-home-section main {
   position: relative;
   z-index: 10;
+
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
   text-align: center;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
-  max-width: none;
+  max-width: none;       /* remove 900px cap so content feels more 'hero' */
   margin: 0;
   padding: 0 16px 40px;
 }
 
-/* Ensure navbar and footer are above the video too */
-.navbar,
-.site-footer {
-  position: relative;
-  z-index: 10;
-}
 /* === Full-page background for Portfolio page === */
 
 body.page-portfolio {
   margin: 0;
   min-height: 100vh;
 
-  background-image: url("/media/portfolio_bacteria_bg.webp"); /* USE WEBP HERE */
+  background-image: url("/media/portfolio_bacteria_bg.webp");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  /* background-attachment: fixed;  optional parallax; comment in if desired */
 
-  /* OPTIONAL — remove if mobile scrolling feels slow */
-  /* background-attachment: fixed; */
-
-  color: #f9fafb;
+  color: #f9fafb;  /* light text on dark bg */
 }
 
 /* Make portfolio content readable over the background */
@@ -266,6 +231,7 @@ body.page-portfolio main {
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
+
 /* === Full-page background video for Scripts page === */
 
 body.python-scripts {
