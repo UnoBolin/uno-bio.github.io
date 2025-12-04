@@ -5,26 +5,35 @@
   <title>Videos – Uno Bio</title>
   <link rel="stylesheet" href="/style.css">
 </head>
+
 <body class="page-videos">
   <div data-include="/partials/header.html"></div>
 
+  <!-- Fullscreen background video for Videos page -->
+  <video
+    class="bg-video-videos"
+    src="/media/rf_v9.mp4"
+    autoplay
+    muted
+    loop
+    playsinline
+    disablepictureinpicture
+  ></video>
+
   <main>
-  <h1>Videos</h1>
-    <main>
-  <h2>How to interpret STD NMR spectra:</h2>
-  <div class="video-container">
-    <video controls>
-      <source src="/videos/std_nmr_spectra.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-  </div>
-</main>
+    <h1>Videos</h1>
 
-  </section>
-</main>
-
+    <h2>How to interpret STD NMR spectra:</h2>
+    <div class="video-container">
+      <video controls>
+        <source src="/videos/std_nmr_spectra.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </main>
 
   <div data-include="/partials/footer.html"></div>
   <script src="/scripts/includes.js"></script>
 </body>
 </html>
+
