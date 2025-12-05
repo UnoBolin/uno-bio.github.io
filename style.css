@@ -360,3 +360,49 @@ body.page-videos main {
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
+/* === Larger + white text on dark-background pages === */
+
+body.page-portfolio,
+body.python-scripts,
+body.page-about {
+  color: #ffffff;            /* make ALL text white */
+  font-size: 18px;           /* increase base text size */
+  line-height: 1.7;          /* more comfortable spacing */
+}
+
+/* Make headings bigger too */
+body.page-portfolio h1,
+body.python-scripts h1,
+body.page-about h1 {
+  font-size: 36px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+body.page-portfolio h2,
+body.python-scripts h2,
+body.page-about h2 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+body.page-portfolio h3,
+body.python-scripts h3,
+body.page-about h3 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #ffffff;
+}
+/* White nav links on dark-background pages */
+body.page-portfolio .nav-link,
+body.python-scripts .nav-link,
+body.page-about .nav-link {
+  color: #ffffff;
+}
+
+body.page-portfolio .nav-link:hover,
+body.python-scripts .nav-link:hover,
+body.page-about .nav-link:hover {
+  color: #93c5fd;  /* soft blue hover */
+}
