@@ -17,20 +17,32 @@ main {
   padding: 0 16px 40px;
 }
 
-/* === Top navigation – style text links === */
+/* === Top navigation – sticky glass header === */
 
 .navbar {
   display: flex;
-  justify-content: center;   /* or flex-start if you prefer */
+  justify-content: center;   /* change to flex-start if you prefer left-aligned */
   align-items: center;
   gap: 32px;
-  padding: 16px 32px;
 
-  position: relative;   /* <-- add this */
-  z-index: 20;          /* <-- and this */
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+
+  padding: 14px 40px;
+
+  /* glass / blur effect */
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  /* subtle shadow like WP header */
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.4);
 }
 
-/* Base nav link – no boxes, just text */
+/* Base nav link – text only, no boxes */
 .nav-link {
   position: relative;
   text-decoration: none;
@@ -44,23 +56,23 @@ main {
   background: none;
   box-shadow: none;
 
-  color: #111827;
+  color: #111827;  /* default (overridden on dark pages below) */
   transition:
     color 0.15s ease,
     opacity 0.15s ease;
 }
 
-/* Blue hover (keep your blue theme) */
+/* Blue hover */
 .nav-link:hover {
   color: #2563eb;
 }
 
-/* Optional subtle active state */
+/* Subtle active click */
 .nav-link:active {
   opacity: 0.8;
 }
 
-/* Little blue underline on hover, like modern navs */
+/* Blue underline on hover, like modern navs */
 .nav-link::after {
   content: "";
   position: absolute;
@@ -98,7 +110,7 @@ p {
   font-size: 14px;
   color: #374151; /* soft gray */
   opacity: 0.7;
-  pointer-events: none;  /* so it doesn't get in the way */
+  pointer-events: none;  /* so it doesn't block clicks */
   z-index: 10;           /* above background videos */
 }
 
@@ -170,11 +182,16 @@ p {
   display: block;
 }
 
-/* Small arrow on “Tools” */
+/* Small arrow on “Tools” – note: this overrides the underline pseudo-element */
 .nav-link.dropdown-toggle::after {
   content: " ▾";
   font-size: 0.75em;
   margin-left: 4px;
+  width: auto;
+  height: auto;
+  background: none;
+  bottom: 0;
+  opacity: 1;
 }
 
 /* === Fullscreen background video for Home === */
@@ -360,6 +377,34 @@ body.page-videos main {
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
+
+/* === Full-page background for Tools page === */
+
+body.page-tools {
+  margin: 0;
+  min-height: 100vh;
+
+  background-image: url("/media/tools.webp");
+  background-size: cover;        /* fill entire screen */
+  background-position: center;   /* center the artwork */
+  background-repeat: no-repeat;
+
+  color: #f9fafb;                /* light text on darker bg */
+}
+
+/* Make Tools content readable on top of the background */
+body.page-tools main {
+  position: relative;
+  z-index: 10;
+
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 24px 24px 40px;
+  background: rgba(0, 0, 0, 0.45);   /* translucent dark panel */
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
 /* === Larger + white text on dark-background pages === */
 
 body.page-portfolio,
@@ -394,41 +439,49 @@ body.page-about h3 {
   font-weight: 600;
   color: #ffffff;
 }
-/* White nav links on dark-background pages */
+
+/* === White nav links on all dark pages (incl. tools) === */
+
+body.page-home-section .nav-link,
 body.page-portfolio .nav-link,
 body.python-scripts .nav-link,
-body.page-about .nav-link {
+body.page-about .nav-link,
+body.page-contact .nav-link,
+body.page-videos .nav-link,
+body.page-tools .nav-link {
   color: #ffffff;
 }
 
+body.page-home-section .nav-link:hover,
 body.page-portfolio .nav-link:hover,
 body.python-scripts .nav-link:hover,
-body.page-about .nav-link:hover {
+body.page-about .nav-link:hover,
+body.page-contact .nav-link:hover,
+body.page-videos .nav-link:hover,
+body.page-tools .nav-link:hover {
   color: #93c5fd;  /* soft blue hover */
 }
-/* === Full-page background for Tools page === */
 
-body.page-tools {
-  margin: 0;
-  min-height: 100vh;
+/* === Active nav item highlighting (underline + stronger color) === */
 
-  background-image: url("/media/tools.webp");
-  background-size: cover;        /* fill entire screen */
-  background-position: center;   /* center the artwork */
-  background-repeat: no-repeat;
-
-  color: #f9fafb;                /* light text on darker bg */
+/* Give the "current page" link a stronger look */
+body.page-home-section .nav-link[href="/"],
+body.page-about .nav-link[href="/about"],
+body.page-contact .nav-link[href="/contact"],
+body.page-portfolio .nav-link[href="/portfolio"],
+body.python-scripts .nav-link[href="/python-scripts"],
+body.page-videos .nav-link[href="/videos"],
+body.page-tools .nav-link[href="/tools"] {
+  font-weight: 600;
 }
 
-/* Make Contact content readable on top of the background */
-body.page-tools main {
-  position: relative;
-  z-index: 10;
-
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 24px 24px 40px;
-  background: rgba(0, 0, 0, 0.45);   /* translucent dark panel */
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+/* Underline for active links (except Tools, which uses ▾ arrow instead) */
+body.page-home-section .nav-link[href="/"]::after,
+body.page-about .nav-link[href="/about"]::after,
+body.page-contact .nav-link[href="/contact"]::after,
+body.page-portfolio .nav-link[href="/portfolio"]::after,
+body.python-scripts .nav-link[href="/python-scripts"]::after,
+body.page-videos .nav-link[href="/videos"]::after {
+  width: 100%;
+  opacity: 1;
 }
