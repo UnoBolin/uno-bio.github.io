@@ -21,10 +21,13 @@ main {
 
 .navbar {
   display: flex;
-  justify-content: center;   /* or flex-start if you want left-aligned */
+  justify-content: center;   /* or flex-start if you prefer */
   align-items: center;
   gap: 32px;
   padding: 16px 32px;
+
+  position: relative;   /* <-- add this */
+  z-index: 20;          /* <-- and this */
 }
 
 /* Base nav link – no boxes, just text */
