@@ -17,59 +17,64 @@ main {
   padding: 0 16px 40px;
 }
 
-/* === 3D Nav Boxes === */
+/* === Top navigation – style text links === */
 
 .navbar {
   display: flex;
-  justify-content: center;
-  gap: 16px;
-  padding: 20px 16px;
-
-  /* needs stacking for home/scripts background video */
-  position: relative;
-  z-index: 10;
+  justify-content: center;   /* or flex-start if you want left-aligned */
+  align-items: center;
+  gap: 32px;
+  padding: 16px 32px;
 }
 
-/* Each link styled as a 3D-ish box */
+/* Base nav link – no boxes, just text */
 .nav-link {
+  position: relative;
   text-decoration: none;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  padding: 12px 26px;
-  border-radius: 14px;
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 0.02em;
 
-  /* “3D” / soft raised effect */
-  background: linear-gradient(145deg, #ffffff, #e5e7eb);
-  box-shadow:
-    4px 4px 10px rgba(0, 0, 0, 0.15),
-    -3px -3px 8px rgba(255, 255, 255, 0.7);
+  padding: 8px 0;
+  border: none;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
 
   color: #111827;
-  border: 1px solid rgba(55, 65, 81, 0.12);
-
   transition:
-    background 0.15s ease,
     color 0.15s ease,
-    transform 0.15s ease,
-    box-shadow 0.15s ease;
+    opacity 0.15s ease;
 }
 
-/* Hover: lift up a bit and change color */
+/* Blue hover (keep your blue theme) */
 .nav-link:hover {
-  background: linear-gradient(145deg, #2563eb, #4f46e5);
-  color: #f9fafb;
-  transform: translateY(-2px);
-  box-shadow:
-    6px 6px 14px rgba(15, 23, 42, 0.3),
-    -2px -2px 6px rgba(255, 255, 255, 0.4);
+  color: #2563eb;
 }
 
-/* Active click effect */
+/* Optional subtle active state */
 .nav-link:active {
-  transform: translateY(0);
-  box-shadow:
-    2px 2px 6px rgba(15, 23, 42, 0.3),
-    -1px -1px 4px rgba(255, 255, 255, 0.4);
+  opacity: 0.8;
+}
+
+/* Little blue underline on hover, like modern navs */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #2563eb, #4f46e5);
+  opacity: 0;
+  transition:
+    width 0.18s ease,
+    opacity 0.18s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+  opacity: 1;
 }
 
 /* Simple headings spacing */
@@ -117,37 +122,38 @@ p {
   display: block;
 }
 
-/* === Dropdown for Tools menu === */
+/* === Dropdown for Tools menu (flat style) === */
 
 .nav-dropdown {
   position: relative;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
 }
 
-/* Dropdown panel (hidden by default) */
+/* Dropdown panel */
 .nav-dropdown .dropdown-menu {
   display: none;
   position: absolute;
-  top: 100%;
-  left: 0;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
 
   min-width: 200px;
   padding: 8px 0;
-  background: #fff;
-  border: 1px solid rgba(0,0,0,0.15);
-  border-radius: 12px;
-  box-shadow:
-    4px 4px 10px rgba(0, 0, 0, 0.15),
-    -3px -3px 8px rgba(255, 255, 255, 0.7);
+  background: #ffffff;
+  border-radius: 10px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.2);
   z-index: 1000;
 }
 
-/* Each dropdown item styled like softer nav links */
+/* Items in dropdown */
 .dropdown-item {
   display: block;
-  padding: 10px 20px;
+  padding: 8px 16px;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 400;
+  font-size: 14px;
   color: #111827;
   white-space: nowrap;
 }
@@ -161,7 +167,7 @@ p {
   display: block;
 }
 
-/* Add small arrow on Tools */
+/* Small arrow on “Tools” */
 .nav-link.dropdown-toggle::after {
   content: " ▾";
   font-size: 0.75em;
