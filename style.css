@@ -671,3 +671,27 @@ body.page-portfolio main {
     transform-origin: top center;
   }
 }
+.video-playpause {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  font-size: 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  z-index: 10;
+  backdrop-filter: blur(4px);
+}
+.video-playpause:hover {
+  background: rgba(37, 99, 235, 0.85);
+}
