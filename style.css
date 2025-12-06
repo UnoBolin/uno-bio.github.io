@@ -602,31 +602,41 @@ body.page-portfolio main {
   margin-left: auto;
   margin-right: auto;
 
-  transform: scale(0.70);      /* 75% of original size */
+  transform: scale(0.70);          /* ~70% of original size */
   transform-origin: top center;
   margin-bottom: 20px;
 }
-/* Image window – image defines height */
+
+/* Image window – image/video defines height */
 .carousel-window {
   width: 100%;
   position: relative;
-  overflow: hidden;            /* ensures arrows don't overflow */
+  overflow: hidden;                 /* keep arrows inside */
 }
-/* Videos behave same as images inside carousel */
+
+/* Slides: images */
+.carousel-window img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  display: none;
+}
+
+/* Slides: video */
 .carousel-window video.carousel-video {
   width: 100%;
   height: auto;
   border-radius: 10px;
   display: none;
 }
+
+/* Active slide (img or video) */
+.carousel-window img.active,
 .carousel-window video.active {
   display: block;
 }
-}
-.carousel-window img.active {
-  display: block;
-}
-/* Arrows OVERLAYED on top of the image */
+
+/* Arrows OVERLAYED on top of the image/video */
 .carousel-arrow {
   position: absolute;
   top: 50%;
@@ -648,29 +658,20 @@ body.page-portfolio main {
 
   backdrop-filter: blur(4px);
 }
+
 .carousel-arrow.prev {
   left: 10px;
 }
+
 .carousel-arrow.next {
   right: 10px;
 }
+
 .carousel-arrow:hover {
   background: rgba(37, 99, 235, 0.9);
 }
-/* Small-screen adjustments */
-@media (max-width: 700px) {
-  .portfolio-headings-grid {
-    grid-template-columns: 1fr;
-  }
-  .portfolio-topbar {
-    justify-content: flex-start;
-  }
-  /* optional: slightly less scale on very small screens */
-  .portfolio-carousel {
-    transform: scale(0.7);
-    transform-origin: top center;
-  }
-}
+
+/* Custom play/pause button overlay for the video */
 .video-playpause {
   position: absolute;
   bottom: 12px;
@@ -691,6 +692,26 @@ body.page-portfolio main {
 
   z-index: 10;
   backdrop-filter: blur(4px);
+}
+
+.video-playpause:hover {
+  background: rgba(37, 99, 235, 0.85);
+}
+
+/* Small-screen adjustments */
+@media (max-width: 700px) {
+  .portfolio-headings-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .portfolio-topbar {
+    justify-content: flex-start;
+  }
+
+  .portfolio-carousel {
+    transform: scale(0.7);
+    transform-origin: top center;
+  }
 }
 .video-playpause:hover {
   background: rgba(37, 99, 235, 0.85);
