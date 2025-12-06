@@ -486,17 +486,21 @@ body.page-tools .nav-link:hover {
   color: #93c5fd;  /* soft blue hover */
 }
 
-/* === Active nav item highlighting (underline + stronger color) === */
-
 /* Give the "current page" link a stronger look */
 body.page-home-section .nav-link[href="/"],
 body.page-about .nav-link[href="/about"],
 body.page-contact .nav-link[href="/contact"],
 body.page-portfolio .nav-link[href="/portfolio"],
 body.python-scripts .nav-link[href="/python-scripts"],
-body.page-videos .nav-link[href="/videos"],
+body.page-videos .nav-link[href="/videos"] {
+  font-weight: 600;
+}
+
+/* Tools: active state uses a border underline since ::after is the arrow */
 body.page-tools .nav-link[href="/tools"] {
   font-weight: 600;
+  border-bottom: 2px solid #93c5fd; /* match your light blue */
+  padding-bottom: 6px;              /* so the line sits a bit below the text */
 }
 
 /* Underline for active links (except Tools, which uses ▾ arrow instead) */
