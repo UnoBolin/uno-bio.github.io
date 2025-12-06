@@ -675,7 +675,7 @@ body.page-portfolio main {
 .video-playpause {
   position: absolute;
   bottom: 12px;
-  right: 12px;
+  left: 12px;
 
   width: 48px;
   height: 48px;
