@@ -655,6 +655,9 @@ body.page-portfolio main {
   }
 }
 .portfolio-carousel {
-  transform: scale(0.75);   /* 75% size */
+  transform: scale(0.50);   /* 75% size */
   transform-origin: top center;
+}
+.portfolio-carousel {
+  margin-bottom: 20px;
 }
