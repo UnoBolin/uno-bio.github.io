@@ -1,5 +1,8 @@
+// scripts/includes.js
+// Simple partial loader for elements with data-include="/path/to/file.html"
+
 document.addEventListener("DOMContentLoaded", () => {
-  const imgs = carousel.querySelectorAll(".carousel-window img, .carousel-window video");
+  const includeTargets = document.querySelectorAll("[data-include]");
 
   includeTargets.forEach((el) => {
     const file = el.getAttribute("data-include");
@@ -17,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
       })
       .catch((err) => {
         console.error(err);
-        el.innerHTML = ""; // or show an error
+        el.innerHTML = "";
       });
   });
 });
