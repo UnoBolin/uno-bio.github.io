@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const includeTargets = document.querySelectorAll("[data-include]");
+  const imgs = carousel.querySelectorAll(".carousel-window img, .carousel-window video");
 
   includeTargets.forEach((el) => {
     const file = el.getAttribute("data-include");
