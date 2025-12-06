@@ -513,3 +513,153 @@ body.page-videos .nav-link[href="/videos"]::after {
   width: 100%;
   opacity: 1;
 }
+
+/* === Portfolio page internal dropdown & layout === */
+body.page-portfolio main {
+  position: relative;
+}
+/* Top bar with internal dropdown */
+.portfolio-topbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+/* Dropdown wrapper */
+.portfolio-dropdown {
+  position: relative;
+  display: inline-block;
+}
+/* Dropdown button */
+.portfolio-dropdown-toggle {
+  background: rgba(15, 23, 42, 0.8);
+  color: #f9fafb;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  border-radius: 9999px;
+  padding: 6px 14px;
+  font-size: 14px;
+  cursor: pointer;
+}
+/* Dropdown menu list */
+.portfolio-dropdown-menu {
+  position: absolute;
+  right: 0;
+  margin-top: 6px;
+  list-style: none;
+  padding: 6px 0;
+  min-width: 160px;
+
+  background: #ffffff;
+  color: #111827;
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.2);
+  display: none;
+  z-index: 100;
+}
+.portfolio-dropdown-menu li {
+  padding: 7px 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.portfolio-dropdown-menu li:hover {
+  background: #f3f4f6;
+}
+.portfolio-dropdown-menu li.active {
+  font-weight: 600;
+  background: #e5efff;
+}
+/* Sections */
+.portfolio-section {
+  margin-top: 24px;
+}
+.portfolio-section h1 {
+  font-size: 26px;
+  margin-bottom: 8px;
+}
+.portfolio-section p {
+  font-size: 15px;
+  line-height: 1.7;
+}
+/* Overview section headings grid */
+.portfolio-headings-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+.portfolio-headings-grid h2 {
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+/* === Shared carousel box for Protocols, Images, Animations === */
+
+.portfolio-carousel {
+  margin-top: 18px;
+  position: relative;
+  max-width: 600px;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  padding: 10px 40px; /* room for arrows */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+/* Window for images */
+.carousel-window {
+  position: relative;
+  overflow: hidden;
+  min-height: 260px; /* adjust as needed */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* All images stacked, JS will hide/show them */
+.carousel-window img {
+  max-width: 100%;
+  max-height: 320px;
+  border-radius: 10px;
+  display: none;
+}
+/* visible image */
+.carousel-window img.active {
+  display: block;
+}
+/* Arrows */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: rgba(15, 23, 42, 0.85);
+  color: #e5e7eb;
+  width: 32px;
+  height: 32px;
+  border-radius: 9999px;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.carousel-arrow.prev {
+  left: 8px;
+}
+.carousel-arrow.next {
+  right: 8px;
+}
+.carousel-arrow:hover {
+  background: rgba(37, 99, 235, 0.9);
+}
+/* Small-screen adjustments */
+@media (max-width: 700px) {
+  .portfolio-headings-grid {
+    grid-template-columns: 1fr;
+  }
+  .portfolio-topbar {
+    justify-content: flex-start;
+  }
+
+  .portfolio-carousel {
+    padding: 10px 32px;
+  }
+}
