@@ -48,34 +48,37 @@
     </section>
 
     <!-- ANIMATIONS (with carousel box) -->
+        <!-- ANIMATIONS (with carousel box) -->
     <section id="portfolio-animations" class="portfolio-section">
       <h1>Animations</h1>
       <p>
         In Progress!
       </p>
 
-<div class="carousel-window">
-  <!-- Overlay arrows (must remain inside this container) -->
-  <button class="carousel-arrow prev" type="button">‹</button>
-  <!-- IMAGE 1 -->
-  <img src="/media/anim1.webp" alt="Animation 1">
-  <!-- IMAGE 2 -->
-  <img src="/media/anim2.webp" alt="Animation 2">
-  <!-- NEW: VIDEO FRAME -->
-  <video
-   src="/videos/std_nmr_spectra.mp4"
-   preload="metadata"
-   class="carousel-video"
-   playsinline
-  ></video>
-  <button class="carousel-arrow next" type="button">›</button>
-  <button class="video-playpause" type="button">▶</button>
-</div>
-        <!-- Box fits image; image controls its own height -->
+      <div class="portfolio-carousel" data-carousel="animations">
         <div class="carousel-window">
-          <!-- Replace these with your own images or GIFs -->
+          <!-- Overlay arrows (must remain inside this container) -->
+          <button class="carousel-arrow prev" type="button" aria-label="Previous animation">‹</button>
+
+          <!-- IMAGE 1 -->
           <img src="/media/anim1.webp" loading="lazy" alt="Animation 1">
+          <!-- IMAGE 2 -->
           <img src="/media/anim2.webp" loading="lazy" alt="Animation 2">
+
+          <!-- NMR spectra video slide -->
+          <video
+            src="/videos/std_nmr_spectra.mp4"
+            preload="metadata"
+            class="carousel-video"
+            playsinline
+          ></video>
+
+          <button class="carousel-arrow next" type="button" aria-label="Next animation">›</button>
+
+          <!-- Play / pause overlay for the video -->
+          <button class="video-playpause" type="button" aria-label="Play or pause video">
+            ▶
+          </button>
         </div>
       </div>
     </section>
