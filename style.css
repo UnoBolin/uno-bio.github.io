@@ -654,3 +654,7 @@ body.page-portfolio main {
     padding: 10px 32px;
   }
 }
+.portfolio-carousel {
+  transform: scale(0.75);   /* 75% size */
+  transform-origin: top center;
+}
