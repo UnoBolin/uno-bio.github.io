@@ -612,12 +612,16 @@ body.page-portfolio main {
   position: relative;
   overflow: hidden;            /* ensures arrows don't overflow */
 }
-/* Images – fill width, maintain aspect ratio */
-.carousel-window img {
+/* Videos behave same as images inside carousel */
+.carousel-window video.carousel-video {
   width: 100%;
   height: auto;
   border-radius: 10px;
   display: none;
+}
+.carousel-window video.active {
+  display: block;
+}
 }
 .carousel-window img.active {
   display: block;
