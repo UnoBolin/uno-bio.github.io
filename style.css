@@ -92,7 +92,7 @@ main {
     opacity 0.18s ease;
 }
 
-.nav-link:hover::after {
+.nav-link:not(.dropdown-toggle):hover::after {
   width: 100%;
   opacity: 1;
 }
@@ -197,10 +197,18 @@ p {
 .nav-link.dropdown-toggle::after {
   content: " ▾";
   position: relative;
-  top: 1px;   /* adjust arrow alignment */
+  top: 1px;             /* adjust arrow alignment */
   margin-left: 4px;
   font-size: 0.75em;
+
+  /* override underline styles so arrow is always visible */
+  width: auto;
+  height: auto;
+  opacity: 1;
+  background: none;
+  bottom: 0;
 }
+
 .nav-dropdown {
   position: relative;
 }
@@ -209,7 +217,6 @@ p {
   top: 100%; /* ensures it touches the Tools link with no vertical gap */
   margin-top: 0; /* remove any spacing */
 }
-
 
 /* === Fullscreen background video for Home === */
 
