@@ -48,7 +48,6 @@
     </section>
 
     <!-- ANIMATIONS (with carousel box) -->
-        <!-- ANIMATIONS (with carousel box) -->
     <section id="portfolio-animations" class="portfolio-section">
       <h1>Animations</h1>
       <p>
@@ -71,6 +70,7 @@
             preload="metadata"
             class="carousel-video"
             playsinline
+            muted
           ></video>
 
           <button class="carousel-arrow next" type="button" aria-label="Next animation">›</button>
@@ -118,27 +118,24 @@
       </p>
 
       <div class="portfolio-carousel" data-carousel="protocols">
-
-  <div class="carousel-window">
-    <button class="carousel-arrow prev">‹</button>
-
-    <img src="/media/competentcells.webp" class="active">
-    <img src="/media/expression.webp">
-    <img src="/media/rnaproduction.webp">
-    <img src="/media/visaintern.webp">
-
-    <button class="carousel-arrow next">›</button>
-  </div>
-
-</div>
-
-        <!-- Box fits image; image controls its own height -->
         <div class="carousel-window">
-          <img src="/media/competentcells.webp" loading="lazy" alt="Preparation of competent cells">
-          <img src="/media/expression.webp" loading="lazy" alt="Protein expression workflow">
-          <img src="/media/rnaproduction.webp" loading="lazy" alt="RNA production workflow">
-          <img src="/media/visaintern.webp" loading="lazy" alt="Workflow overview figure">
+          <button class="carousel-arrow prev">‹</button>
+
+          <img src="/media/competentcells.webp" class="active">
+          <img src="/media/expression.webp">
+          <img src="/media/rnaproduction.webp">
+          <img src="/media/visaintern.webp">
+
+          <button class="carousel-arrow next">›</button>
         </div>
+      </div>
+
+      <!-- Static image list below the carousel -->
+      <div class="carousel-window">
+        <img src="/media/competentcells.webp" loading="lazy" alt="Preparation of competent cells">
+        <img src="/media/expression.webp" loading="lazy" alt="Protein expression workflow">
+        <img src="/media/rnaproduction.webp" loading="lazy" alt="RNA production workflow">
+        <img src="/media/visaintern.webp" loading="lazy" alt="Workflow overview figure">
       </div>
     </section>
   </main>
@@ -191,39 +188,72 @@
       });
     })();
 
-    // === Simple image carousels for Protocols / Images / Animations ===
+    // === Simple image + video carousels for Protocols / Images / Animations ===
     (function () {
       const carousels = document.querySelectorAll(".portfolio-carousel");
       if (!carousels.length) return;
 
       carousels.forEach((carousel) => {
-        const imgs = carousel.querySelectorAll(".carousel-window img");
-        if (!imgs.length) return;
+        // Treat images + videos as slides
+        const slides = carousel.querySelectorAll(
+          ".carousel-window img, .carousel-window video.carousel-video"
+        );
+        if (!slides.length) return;
 
         let index = 0;
-        // Show first image
-        imgs.forEach((img, i) => {
-          img.classList.toggle("active", i === 0);
+
+        // Show first slide
+        slides.forEach((slide, i) => {
+          slide.classList.toggle("active", i === 0);
         });
 
         const show = (i) => {
-          imgs.forEach((img, idx) => {
-            img.classList.toggle("active", idx === i);
+          slides.forEach((slide, idx) => {
+            const isActive = idx === i;
+            slide.classList.toggle("active", isActive);
+
+            // If a video slide is hidden, pause + reset it
+            if (slide.tagName === "VIDEO" && !isActive) {
+              slide.pause();
+              try {
+                slide.currentTime = 0;
+              } catch (e) {
+                // ignore if browser blocks resetting currentTime immediately
+              }
+            }
           });
         };
 
         const prevBtn = carousel.querySelector(".carousel-arrow.prev");
         const nextBtn = carousel.querySelector(".carousel-arrow.next");
 
+        if (!prevBtn || !nextBtn) return;
+
         prevBtn.addEventListener("click", () => {
-          index = (index - 1 + imgs.length) % imgs.length;
+          index = (index - 1 + slides.length) % slides.length;
           show(index);
         });
 
         nextBtn.addEventListener("click", () => {
-          index = (index + 1) % imgs.length;
+          index = (index + 1) % slides.length;
           show(index);
         });
+
+        // Optional: hook up the play/pause overlay if present
+        const video = carousel.querySelector("video.carousel-video");
+        const playButton = carousel.querySelector(".video-playpause");
+
+        if (video && playButton) {
+          playButton.addEventListener("click", () => {
+            if (video.paused) {
+              video.play();
+              playButton.textContent = "❚❚";
+            } else {
+              video.pause();
+              playButton.textContent = "▶";
+            }
+          });
+        }
       });
     })();
   </script>
