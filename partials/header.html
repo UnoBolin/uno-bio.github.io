@@ -1,20 +1,38 @@
-<nav class="navbar">
+<nav class="navbar" aria-label="Main navigation">
   <a class="nav-link" href="/">Home</a>
   <a class="nav-link" href="/about">About</a>
   <a class="nav-link" href="/contact">Contact</a>
   <a class="nav-link" href="/videos">Videos</a>
   <a class="nav-link" href="/python-scripts">Scripts</a>
   <a class="nav-link" href="/portfolio">Portfolio</a>
+
+  <!-- Tools dropdown -->
   <div class="nav-dropdown">
-  <a class="nav-link dropdown-toggle" href="/tools">Tools</a>
-  <div class="dropdown-menu">
-    <a class="dropdown-item" href="/tools">Tools overview</a>
-    <a class="dropdown-item"
-       href="https://std-simulator.streamlit.app/"
-       target="_blank"
-       rel="noopener">
-      STD simulator (real-time)
+    <!-- Top-level: still navigates to /tools, but also controls the dropdown -->
+    <a
+      class="nav-link dropdown-toggle"
+      href="/tools"
+      role="button"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >
+      <span class="nav-label">Tools</span>
+      <span class="nav-arrow" aria-hidden="true">▾</span>
     </a>
+
+    <div class="dropdown-menu" role="menu">
+      <a class="dropdown-item" href="/tools" role="menuitem">
+        Tools overview
+      </a>
+      <a
+        class="dropdown-item"
+        href="https://std-simulator.streamlit.app/"
+        target="_blank"
+        rel="noopener"
+        role="menuitem"
+      >
+        STD simulator (real-time)
+      </a>
+    </div>
   </div>
- </div>
 </nav>
