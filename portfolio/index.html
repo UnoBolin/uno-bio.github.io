@@ -17,9 +17,9 @@
         </button>
         <ul class="portfolio-dropdown-menu">
           <li data-target="#portfolio-overview" class="active">Overview</li>
-          <li data-target="#portfolio-protocols">Protocols</li>
-          <li data-target="#portfolio-images">Images</li>
           <li data-target="#portfolio-animations">Animations</li>
+          <li data-target="#portfolio-images">Images</li>
+          <li data-target="#portfolio-protocols">Protocols</li>
         </ul>
       </div>
     </div>
@@ -43,6 +43,66 @@
         <div>
           <h2>Animations</h2>
           <p>In Progress!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ANIMATIONS (with carousel box) -->
+    <section id="portfolio-animations" class="portfolio-section">
+      <h1>Animations</h1>
+      <p>
+        In Progress!
+      </p>
+
+<div class="carousel-window">
+  <!-- Overlay arrows (must remain inside this container) -->
+  <button class="carousel-arrow prev" type="button">‹</button>
+  <!-- IMAGE 1 -->
+  <img src="/media/anim1.webp" alt="Animation 1">
+  <!-- IMAGE 2 -->
+  <img src="/media/anim2.webp" alt="Animation 2">
+  <!-- NEW: VIDEO FRAME -->
+  <video
+   src="/videos/std_nmr_spectra.mp4"
+   preload="metadata"
+   class="carousel-video"
+   playsinline
+  ></video>
+  <button class="carousel-arrow next" type="button">›</button>
+  <button class="video-playpause" type="button">▶</button>
+</div>
+        <!-- Box fits image; image controls its own height -->
+        <div class="carousel-window">
+          <!-- Replace these with your own images or GIFs -->
+          <img src="/media/anim1.webp" loading="lazy" alt="Animation 1">
+          <img src="/media/anim2.webp" loading="lazy" alt="Animation 2">
+        </div>
+      </div>
+    </section>
+
+    <!-- IMAGES (with carousel box) -->
+    <section id="portfolio-images" class="portfolio-section">
+      <h1>Images</h1>
+      <p>
+        In Progress!
+      </p>
+
+      <div class="portfolio-carousel" data-carousel="images">
+        <!-- Arrows above the image -->
+        <div class="carousel-toolbar">
+          <button class="carousel-arrow prev" type="button" aria-label="Previous image">
+            ‹
+          </button>
+          <button class="carousel-arrow next" type="button" aria-label="Next image">
+            ›
+          </button>
+        </div>
+
+        <!-- Box fits image; image controls its own height -->
+        <div class="carousel-window">
+          <!-- Replace these with your own images -->
+          <img src="/media/images1.webp" loading="lazy" alt="Portfolio image 1">
+          <img src="/media/images2.webp" loading="lazy" alt="Portfolio image 2">
         </div>
       </div>
     </section>
@@ -75,70 +135,6 @@
           <img src="/media/expression.webp" loading="lazy" alt="Protein expression workflow">
           <img src="/media/rnaproduction.webp" loading="lazy" alt="RNA production workflow">
           <img src="/media/visaintern.webp" loading="lazy" alt="Workflow overview figure">
-        </div>
-      </div>
-    </section>
-
-    <!-- IMAGES (with carousel box) -->
-    <section id="portfolio-images" class="portfolio-section">
-      <h1>Images</h1>
-      <p>
-        In Progress!
-      </p>
-
-      <div class="portfolio-carousel" data-carousel="images">
-        <!-- Arrows above the image -->
-        <div class="carousel-toolbar">
-          <button class="carousel-arrow prev" type="button" aria-label="Previous image">
-            ‹
-          </button>
-          <button class="carousel-arrow next" type="button" aria-label="Next image">
-            ›
-          </button>
-        </div>
-
-        <!-- Box fits image; image controls its own height -->
-        <div class="carousel-window">
-          <!-- Replace these with your own images -->
-          <img src="/media/images1.webp" loading="lazy" alt="Portfolio image 1">
-          <img src="/media/images2.webp" loading="lazy" alt="Portfolio image 2">
-        </div>
-      </div>
-    </section>
-
-    <!-- ANIMATIONS (with carousel box) -->
-    <section id="portfolio-animations" class="portfolio-section">
-      <h1>Animations</h1>
-      <p>
-        In Progress!
-      </p>
-
-      <div class="portfolio-carousel" data-carousel="animations">
-        <div class="carousel-window">
-          <!-- Overlay arrows (must remain inside this container) -->
-          <button class="carousel-arrow prev" type="button" aria-label="Previous animation">‹</button>
-
-          <!-- IMAGE 1 -->
-          <img src="/media/anim1.webp" loading="lazy" alt="Animation 1">
-
-          <!-- IMAGE 2 -->
-          <img src="/media/anim2.webp" loading="lazy" alt="Animation 2">
-
-          <!-- NMR spectra video -->
-          <video
-            src="/videos/std_nmr_spectra.mp4"
-            preload="metadata"
-            class="carousel-video"
-            playsinline
-            muted
-          ></video>
-
-          <button class="carousel-arrow next" type="button" aria-label="Next animation">›</button>
-
-          <!-- Play / pause overlay for video -->
-          <button class="video-playpause" type="button" aria-label="Play or pause video">
-            ▶
-          </button>
         </div>
       </div>
     </section>
@@ -198,33 +194,31 @@
       if (!carousels.length) return;
 
       carousels.forEach((carousel) => {
-        const slides = carousel.querySelectorAll(".carousel-window img, .carousel-window video.carousel-video");
-        if (!slides.length) return;
+        const imgs = carousel.querySelectorAll(".carousel-window img");
+        if (!imgs.length) return;
 
         let index = 0;
-        // Show first slide (image or video)
-        slides.forEach((slide, i) => {
-          slide.classList.toggle("active", i === 0);
+        // Show first image
+        imgs.forEach((img, i) => {
+          img.classList.toggle("active", i === 0);
         });
 
         const show = (i) => {
-          slides.forEach((slide, idx) => {
-            slide.classList.toggle("active", idx === i);
+          imgs.forEach((img, idx) => {
+            img.classList.toggle("active", idx === i);
           });
         };
 
         const prevBtn = carousel.querySelector(".carousel-arrow.prev");
         const nextBtn = carousel.querySelector(".carousel-arrow.next");
 
-        if (!prevBtn || !nextBtn) return;
-
         prevBtn.addEventListener("click", () => {
-          index = (index - 1 + slides.length) % slides.length;
+          index = (index - 1 + imgs.length) % imgs.length;
           show(index);
         });
 
         nextBtn.addEventListener("click", () => {
-          index = (index + 1) % slides.length;
+          index = (index + 1) % imgs.length;
           show(index);
         });
       });
