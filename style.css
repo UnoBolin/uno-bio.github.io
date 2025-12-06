@@ -71,6 +71,11 @@ main {
 .nav-link:active {
   opacity: 0.8;
 }
+.nav-link:focus-visible {
+  color: #2563eb;              /* same blue as hover */
+  outline: 2px solid #60a5fa;  /* visible focus ring */
+  outline-offset: 3px;
+}
 
 /* Blue underline on hover, like modern navs */
 .nav-link::after {
@@ -181,18 +186,30 @@ p {
 .nav-dropdown:hover .dropdown-menu {
   display: block;
 }
+.nav-dropdown:focus-within .dropdown-menu {
+  display: block;
+}
+.nav-link.dropdown-toggle {
+  display: inline-flex;
+  align-items: center;
+}
 
-/* Small arrow on “Tools” – note: this overrides the underline pseudo-element */
 .nav-link.dropdown-toggle::after {
   content: " ▾";
-  font-size: 0.75em;
+  position: relative;
+  top: 1px;   /* adjust arrow alignment */
   margin-left: 4px;
-  width: auto;
-  height: auto;
-  background: none;
-  bottom: 0;
-  opacity: 1;
+  font-size: 0.75em;
 }
+.nav-dropdown {
+  position: relative;
+}
+
+.nav-dropdown .dropdown-menu {
+  top: 100%; /* ensures it touches the Tools link with no vertical gap */
+  margin-top: 0; /* remove any spacing */
+}
+
 
 /* === Fullscreen background video for Home === */
 
