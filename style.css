@@ -597,41 +597,22 @@ body.page-portfolio main {
 .portfolio-carousel {
   margin-top: 18px;
   position: relative;
-  max-width: 900px;             /* wider + image-driven height */
+  max-width: 900px;
   width: 100%;
   margin-left: auto;
   margin-right: auto;
+
+  transform: scale(0.70);      /* 75% of original size */
+  transform-origin: top center;
+  margin-bottom: 20px;
 }
-/* Toolbar with arrows ABOVE the image */
-.carousel-toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-}
-/* Arrows (no longer absolutely positioned) */
-.carousel-arrow {
-  border: none;
-  background: rgba(15, 23, 42, 0.85);
-  color: #e5e7eb;
-  width: 32px;
-  height: 32px;
-  border-radius: 9999px;
-  cursor: pointer;
-  font-size: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.carousel-arrow:hover {
-  background: rgba(37, 99, 235, 0.9);
-}
-/* Window for images – box height is driven by the image itself */
+/* Image window – image defines height */
 .carousel-window {
   width: 100%;
   position: relative;
+  overflow: hidden;            /* ensures arrows don't overflow */
 }
-/* Images control height; only one visible at a time */
+/* Images – fill width, maintain aspect ratio */
 .carousel-window img {
   width: 100%;
   height: auto;
@@ -641,6 +622,37 @@ body.page-portfolio main {
 .carousel-window img.active {
   display: block;
 }
+/* Arrows OVERLAYED on top of the image */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+
+  background: rgba(0, 0, 0, 0.55);
+  color: #f9fafb;
+  border: none;
+  width: 55px;
+  height: 55px;
+  border-radius: 9999px;
+  cursor: pointer;
+  font-size: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  backdrop-filter: blur(4px);
+}
+.carousel-arrow.prev {
+  left: 10px;
+}
+.carousel-arrow.next {
+  right: 10px;
+}
+.carousel-arrow:hover {
+  background: rgba(37, 99, 235, 0.9);
+}
 /* Small-screen adjustments */
 @media (max-width: 700px) {
   .portfolio-headings-grid {
@@ -649,15 +661,9 @@ body.page-portfolio main {
   .portfolio-topbar {
     justify-content: flex-start;
   }
-
+  /* optional: slightly less scale on very small screens */
   .portfolio-carousel {
-    padding: 10px 32px;
+    transform: scale(0.7);
+    transform-origin: top center;
   }
-}
-.portfolio-carousel {
-  transform: scale(0.50);   /* 75% size */
-  transform-origin: top center;
-}
-.portfolio-carousel {
-  margin-bottom: 20px;
 }
