@@ -10,13 +10,13 @@
   // Dropdown starts closed
   menu.style.display = "none";
 
-  // Open/close when clicking the toggle
+  // Toggle dropdown open/closed
   toggle.addEventListener("click", () => {
-    const open = menu.style.display === "block";
-    menu.style.display = open ? "none" : "block";
+    const isOpen = menu.style.display === "block";
+    menu.style.display = isOpen ? "none" : "block";
   });
 
-  // Click on item → scroll + highlight + rename toggle
+  // Clicking an item: scroll + update label + active state
   items.forEach((li) => {
     li.addEventListener("click", () => {
       const targetSelector = li.getAttribute("data-target");
@@ -26,19 +26,15 @@
         section.scrollIntoView({ behavior: "smooth", block: "start" });
       }
 
-      // Update active status
       items.forEach((x) => x.classList.remove("active"));
       li.classList.add("active");
-
-      // Update dropdown button label
       toggle.textContent = li.textContent + " ▾";
 
-      // Close menu
       menu.style.display = "none";
     });
   });
 
-  // Close dropdown when clicking outside it
+  // Close dropdown when clicking outside
   document.addEventListener("click", (e) => {
     if (!dropdown.contains(e.target)) {
       menu.style.display = "none";
@@ -52,7 +48,7 @@
   if (!carousels.length) return;
 
   carousels.forEach((carousel) => {
-    // Both images and videos count as slides
+    // Treat images + videos as slides
     const slides = carousel.querySelectorAll(
       ".carousel-window img, .carousel-window video.carousel-video"
     );
@@ -60,48 +56,64 @@
 
     let index = 0;
 
-    // Make the first slide visible
-    slides.forEach((slide, i) => {
-      slide.classList.toggle("active", i === 0);
-    });
+    const video = carousel.querySelector("video.carousel-video");
+    const playButton = carousel.querySelector(".video-playpause");
 
-    // Function to update visible slide
+    // Helper: show slide at index i
     const show = (i) => {
       slides.forEach((slide, idx) => {
         const isActive = idx === i;
         slide.classList.toggle("active", isActive);
 
-        // Reset videos when hidden
+        // If a video slide is hidden, pause + reset it
         if (slide.tagName === "VIDEO" && !isActive) {
           slide.pause();
           try {
             slide.currentTime = 0;
-          } catch (err) {}
+          } catch (e) {
+            // some browsers might block setting currentTime immediately
+          }
         }
       });
+
+      // Only show the play button when the video slide is actually visible
+      if (video && playButton) {
+        if (slides[i] === video) {
+          playButton.style.display = "flex";
+        } else {
+          playButton.style.display = "none";
+        }
+      }
     };
+
+    // Initial state: first slide visible
+    show(index);
 
     const prevBtn = carousel.querySelector(".carousel-arrow.prev");
     const nextBtn = carousel.querySelector(".carousel-arrow.next");
 
-    if (!prevBtn || !nextBtn) return;
+    if (prevBtn && nextBtn) {
+      prevBtn.addEventListener("click", () => {
+        index = (index - 1 + slides.length) % slides.length;
+        show(index);
+      });
 
-    prevBtn.addEventListener("click", () => {
-      index = (index - 1 + slides.length) % slides.length;
-      show(index);
-    });
+      nextBtn.addEventListener("click", () => {
+        index = (index + 1) % slides.length;
+        show(index);
+      });
+    }
 
-    nextBtn.addEventListener("click", () => {
-      index = (index + 1) % slides.length;
-      show(index);
-    });
-
-    // Play/pause button for video slide (only if present)
-    const video = carousel.querySelector("video.carousel-video");
-    const playButton = carousel.querySelector(".video-playpause");
-
+    // Play/pause overlay button for the video (if present)
     if (video && playButton) {
-      playButton.addEventListener("click", () => {
+      // Ensure correct initial visibility (in case video isn't the first slide)
+      playButton.style.display = slides[index] === video ? "flex" : "none";
+
+      playButton.addEventListener("click", (event) => {
+        // Don't accidentally trigger anything else
+        event.stopPropagation();
+        event.preventDefault();
+
         if (video.paused) {
           video.play();
           playButton.textContent = "❚❚"; // pause icon
